@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block css %}{% endblock %}
+
+{% block javascripttop %}{% endblock %}
+
+{% block body %}
+
+
+<div class="container">  <!-- Main body of webpage -->
+    <div class="starter-template">
+        <h1>Welcome</h1>
+        <p class="lead">Search for a summary of your local candidates.<br> 
+            First, input your 5 digit ZIP code to find a list of Congressional candidates.<br></p>
+    </div>
+    <div class="cards">       
+        <div class="row">   <!--first row is search input and button-->
+            <div class="col-sm-2"></div>  <!--spacer-->
+            <div class="col-sm-6">
+                <input type="search" class="form-control" id="zip" name="zip" placeholder="Enter ZIP*">
+            </div>
+            <button id="querymaker" class="btn btn-large search.btn.btn-primary col-sm-2">Submit</button>
+            <div class="col-sm-2"></div>  <!--spacer-->
+        </div>
+        <br><br>
+        <div class="row">   <!--second row is table of candidates-->
+            <div class="col-sm-2"></div>  <!--spacer-->
+            <div id='candbox' class='list-group col-sm-6'>
+                <table class="table table-hover">
+                </table>
+                <div style="display:none" class="loading" id="dvloader"> <!-- Shows loading gif -->
+                    <img src="/static/dist/images/ajax-loader.gif" class="ajax-loader" /><br><br><br>
+                </div>
+                <small><i>*ZIP codes may span multiple congressional districts.</i></small>
+            </div>
+        </div>
+    </div>
+</div><!-- /.container -->
+
+{% endblock %}
+
+{% block javascriptbottom %}
+
+<!-- 
+Script to populate candidate table
+ -->
+<script>
+    var query_for_cands = function() {
+        $("#candbox tr").remove();
+        $("#dvloader").show();
+        cands = [];
+        jQuery.ajax(
+          'zipsearch',
+          {data: {zip: $('input#zip.form-control').val()},
+          success:
+            function(data) {
+                $("#dvloader").hide();
+                cands = data.cands;
+                $("#candbox table").append('<tr><th>Name</th><th>Party</th><th>Office</th></tr>');
+                for (i=0; i < cands.length; i++) {
+                    $("#candbox table").append(
+                    '<tr><td><a href="/' + cands[i]['id'] + '"></a>' + cands[i]['name'] + 
+                    '</td><td>' + cands[i]['party'] + 
+                    '</td><td>' + cands[i]['office'] +
+                    '</td></tr>');
+                }
+                $('tr').click( function() {
+                window.location = $(this).find('a').attr('href');
+                });
+            },
+            error: function (response) {
+                $("#candbox table").append('<tr><th>Error: Please input 5 digit zip code.</th></tr>');
+
+            }
+          }
+        )
+    }
+    $(document).ready(function() {
+        $('input#zip.form-control').keyup(function(event){
+            if(event.keyCode == 13){
+                query_for_cands();
+            };
+        });
+
+        $('#querymaker').click(query_for_cands);
+        }
+    )
+</script>
+
+{% endblock %}

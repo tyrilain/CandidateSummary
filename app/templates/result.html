@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block css %}{% endblock %}
+{% block javascripttop %}{% endblock %}
+
+{% block body %}
+    <!--the website -->
+    <div class="container">
+    <br>
+        <div class="row">   <!--second row contains bio card and fav phrases-->
+            <div class="col-sm-6">
+                <div class="panel panel-default" id="card1"> <!--bio-->
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left">
+                        {{cand.name}}
+                        </h3>
+<!-- 
+                        <a class="btn btn-success pull-right" href="#">
+                        <i class="fa fa-check"></i>
+                        Something here
+                        </a>
+ -->
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table cellpadding='10'>
+                              <tr><td>
+                                  <p><img src="http://www.votesmart.org/canphoto/{{cand.id}}.jpg"></p>
+                              </td>
+                              <td>
+                                    <p> {{cand.party}}</p>
+                                    <p> {{cand.office}} </p>
+                                    <p> {{cand.state}} {{cand.district}} </p>
+                              </td></tr>
+
+                              </table>
+                           
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <small><a href="http://votesmart.org/candidate/{{cand.id}}">
+                        More details at VoteSmart
+                        </a></small>
+<!-- 
+                        <small> Stuff goes down here? </small>
+ -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+<!-- 
+                <div class="panel-group" id="accordion">
+ -->
+                    <div class="panel panel-default" id="card2">
+                        <div class="panel-heading clearfix">
+                            <h3 class="panel-title pull-left">
+                            Favorite Phrases
+                            </h3>
+<!-- 
+                            <a class="btn btn-success pull-right" href="#">
+                            <i class="fa fa-check"></i>
+                            Something here
+                            </a>
+ -->
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                private sector<br>
+                                bay area<br>
+                                climate change<br>
+                                hong kong<br>
+                                old saying<br>
+                                united states<br>
+                                burdensome regulations<br>
+                                international trade<br>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                        <small><a href="/about">
+                        Technical details
+                        </a></small>
+
+<!--                             <small> Stuff at bottom </small> -->
+                        </div>
+                    </div>
+<!-- 
+                </div>
+ -->
+            </div>
+        </div>
+        <div>
+
+              <br><b>Summary Quotes:</b> <br>
+              <ul>
+              <li>
+              Many of the flood of asylum seekers are minors sent north by parents who despair for their children&#39;s future in violence-ridden Central American countries like El Salvador, Guatemala and Honduras.
+              </li>
+              <li>
+                Mexico won&#39;t stop them, and, in fact, President Enrique Pena Nieto on Monday announced plans to help guarantee their safety and effectively facilitate their transit northward.
+              </li>
+              <li>
+If you decide to write that check to an out of state politician, remember next time you are complaining about local incumbent Democrats, be prepared to accept your share of responsibility because you didn&#39;t support candidates here at home.
+              </li>
+              <li>
+This burden is a terrible legacy to leave to our children, and the harm is compounded by the fact that this debt puts downward pressure on our economy, costing us the jobs and spending that could fuel a robust recovery.
+              </li>
+              <li>
+As a Congressman, my signature legislative agenda will be a reprioritizing and reimagining of our nation&#39;s infrastructure: modern roads and clean, efficient transportation, rebuilt bridges, secure electrical grids and renewable energy.
+                </ul>
+        </div>
+    </div><!-- /.container -->
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block css %}{% endblock %}
+{% block javascripttop %}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+      <div class="starter-template">
+        <h1>Welcome</h1>
+        <p class="lead">Search for a summary of your favorite candidate.<br> </p>
+      </div>
+      <div class="bs-example">
+        
+        <div class="row">   <!--first row is search again button-->
+        <div class="col-sm-2"></div>
+            <form role="form" action="/candidate" method="GET">
+                <div class="form-group col-sm-6">
+                    <input type="search" class="form-control" id="CandName" name="CandName" placeholder="Robin Chew">
+                </div>
+                <button type="submit" class="btn btn-large btn-success col-sm-2">Submit</button>
+            </form>
+        <div class="col-sm-2"></div>
+        </div>
+
+<!-- 
+            <form id="myform" action="/candidate/100/">
+                <div class="form-group">
+                    <label>Name</label><br>
+                    <input type="text" class="typeahead tt-query" id="CandName" placeholder="Robin Chew">
+                </div>
+                <button type="submit" id="mybutton" class="btn btn-primary">Go</button>
+            </form> 
+ -->
+      </div>
+      <div id="infobox">
+          <p></p>
+      </div>
+
+</div><!-- /.container -->
+
+{% endblock %}
+
+{% block javascriptbottom %}
+<script>
+    // load candidates into search bar
+    $.get('/poplist').done(function(candlist){
+        console.log(candlist)
+        $('#CandName').typeahead({
+            local: candlist['data'],
+            keyValue: "fullname",
+            limit: 5
+            });
+    });
+</script>
+
+{% endblock %}

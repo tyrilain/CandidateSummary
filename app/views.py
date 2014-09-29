@@ -5,7 +5,7 @@ import pymysql as mdb
 from votesmart import votesmart
 votesmart.apikey = '3735e7f15dceca1fb005baa0d6a7d717'
 
-db = mdb.connect(user="root", host="localhost", db="VoteSmart", charset='utf8')
+db = mdb.connect(user="root", passwd='mysql!470', host="localhost", db="VoteSmart", charset='utf8')
 
 def getcandlist(con):
     # get current list of all candidates to populate search bar

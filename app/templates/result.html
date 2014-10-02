@@ -25,6 +25,10 @@
                                     <p> {{cand.party}}</p>
                                     <p> {{cand.office}}  {{cand.district}}  </p>
                                     <p> {{cand.state}} </p>
+                                    <p> <img src="static/dist/images/Website_icon.png" height="20" width="20">  
+                                    <img src="static/dist/images/Facebook_icon.svg" height="20" width="20">  
+                                    <img src="static/dist/images/Twitter_icon.jpg" height="20" width="20">  
+                                    </p>
                               </td></tr>
 
                               </table>
@@ -46,18 +50,13 @@
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse in">
                             <div class="panel-body">
-                                private sector<br>
-                                bay area<br>
-                                climate change<br>
-                                hong kong<br>
-                                old saying<br>
-                                united states<br>
-                                burdensome regulations<br>
-                                international trade<br>
+                            {% for bigram in cand.bigrams %}
+                                {{bigram}}<br>
+                            {% endfor %}
                             </div>
                         </div>
                         <div class="panel-footer">
-                        <small><a href="/about">
+                        <small><a href="/slides">
                         Technical details
                         </a></small>
                         </div>
@@ -68,9 +67,12 @@
 
               <br><b>Summary Quotes:</b> <br>
               <ul>
+              {% for quote in cand.quotes %}
               <li>
+              {{quote}}
               Many of the flood of asylum seekers are minors sent north by parents who despair for their children&#39;s future in violence-ridden Central American countries like El Salvador, Guatemala and Honduras.
               </li>
+              {% endfor %}
               <li>
                 Mexico won&#39;t stop them, and, in fact, President Enrique Pena Nieto on Monday announced plans to help guarantee their safety and effectively facilitate their transit northward.
               </li>

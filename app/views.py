@@ -119,31 +119,22 @@ def show_cand(candID):
     db.query("SELECT b1, b2, b3, b4, b5, b6, b7, b8 FROM bigrams_tbl WHERE id = %s;", cand_id)
     query_results = db.cur.fetchall()
     db.cur.close()
-
-    cand_dict['bigrams'] = list(query_results[0])
-#     ['private sector',
-#                               'bay area',
-#                                 'climate change',
-#                                 'hong kong',
-#                                 'old saying',
-#                                 'united states',
-#                                 'burdensome regulations',
-#                                 'international trade']
+    bigrams = [result for result in query_results[0] if result]
+    if bigrams:
+        cand_dict['bigrams'] = bigrams
+    else:
+        cand_dict['bigrams'] = ["I'm sorry, but I have no data for this candidate."]
 
     # query database for quote info
     db = load_db.DB()
     db.query("SELECT q1, q2, q3, q4, q5 FROM quotes_tbl WHERE id = %s;", cand_id)
     query_results = db.cur.fetchall()
     db.cur.close()
-
-    cand_dict['quotes'] = list(query_results[0])
-#     cand_dict['quotes'] = ['Many of the flood of asylum seekers are minors sent north by parents who despair for their children&#39;s future in violence-ridden Central American countries like El Salvador, Guatemala and Honduras.',
-#                             'Mexico won&#39;t stop them, and, in fact, President Enrique Pena Nieto on Monday announced plans to help guarantee their safety and effectively facilitate their transit northward.',
-#                             'If you decide to write that check to an out of state politician, remember next time you are complaining about local incumbent Democrats, be prepared to accept your share of responsibility because you didn&#39;t support candidates here at home.',
-#                             'This burden is a terrible legacy to leave to our children, and the harm is compounded by the fact that this debt puts downward pressure on our economy, costing us the jobs and spending that could fuel a robust recovery.',
-#                             'As a Congressman, my signature legislative agenda will be a reprioritizing and reimagining of our nation&#39;s infrastructure: modern roads and clean, efficient transportation, rebuilt bridges, secure electrical grids and renewable energy.']
-#     cand_dict['quotes'] = [ftfy.fix_text(unicode(quote)) for quote in cand_dict['quotes']]
-
+    quotes = [result for result in query_results[0] if result]
+    if quotes:
+        cand_dict['quotes'] = quotes
+    else:
+        cand_dict['quotes'] = ["I'm sorry, but I have no data for this candidate."]
 
     return render_template("result.html", cand=cand_dict)
 

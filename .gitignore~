@@ -1,0 +1,6 @@
+.DS_Store
+.gitignore
+run.py
+run.pyc
+app/load_db.py
+app/load_db.pyc
